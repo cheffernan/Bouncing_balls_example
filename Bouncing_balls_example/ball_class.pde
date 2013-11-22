@@ -6,7 +6,7 @@ class Ball {
   Ball() {
     loc = new PVector(random(width), random(height));
     vel = PVector.random2D();
-    d = 80;
+    d = 10;
     c = color(random(360), 100, 100);
   }
 
@@ -41,8 +41,18 @@ class Ball {
   void ballCheck(Ball b) {  //I pass in one argument - an object of the ball class
     if (loc.dist(b.loc) < d/2 + b.d/2) {  //Check to see if the distance between the centers of the circles is less than the radii of the circles
       //instead of changing colors, balls get a random velocity
-      vel = PVector.random2D();
-      b.vel = PVector.random2D();
+      if (loc.x < b.loc.x) {
+        vel.x = -abs(vel.x);
+      }
+      if(loc.x > b.loc.x){
+       vel.x = abs(vel.x); 
+      }
+      if(loc.y < b.loc.y){
+       vel.y = -abs(vel.y); 
+      }
+      if(loc.y > b.loc.y){
+       vel.y = abs(vel.y); 
+      }
     }
   }
 }
